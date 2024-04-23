@@ -26,35 +26,24 @@ const text = document.querySelector("#banner p");
 const fragment = document.createDocumentFragment()
 /*Variable pour la bannière initial*/
 let actualSlide = 0
-/*Affichage de l'écouteur d'évènement du click droit*/
+/*Affichage de l'écouteur d'évènement du click droit et gauche*/
 
-	arrowRight.addEventListener("click",()=>{
-		
-		const slidesDots = document.querySelectorAll(".dot");
-		slidesDots[actualSlide].classList.remove("dot_selected");
-		actualSlide++;
-		if (actualSlide > slides.length - 1) {
-			actualSlide = 0;
-		}
-		img.src = `./assets/images/slideshow/${slides[actualSlide].image}`;
-		text.innerHTML = slides[actualSlide].tagLine;
-		slidesDots[actualSlide].classList.add("dot_selected");
-	});
+function directionSlides(direction) {
+    const slidesDots = document.querySelectorAll(".dot");
+    slidesDots[actualSlide].classList.remove("dot_selected");
+    if (direction === "right") {
+        actualSlide = (actualSlide + 1) % slides.length;
+    } else {
+        actualSlide = (actualSlide - 1 + slides.length) % slides.length;
+    }
+    img.src = `./assets/images/slideshow/${slides[actualSlide].image}`;
+    text.innerHTML = slides[actualSlide].tagLine;
+    slidesDots[actualSlide].classList.add("dot_selected");
+};
 
-/*Affichage de l'écouteur d'évènement du click gauche*/
+arrowRight.addEventListener("click", () => directionSlides("right"));
+arrowLeft.addEventListener("click", () => directionSlides("left"));
 
-	arrowLeft.addEventListener("click",()=> {
-		
-		const slidesDots = document.querySelectorAll(".dot");
-		slidesDots[actualSlide].classList.remove("dot_selected");
-		actualSlide--;
-		if (actualSlide < 0) {
-			actualSlide = slides.length - 1;
-		}
-		img.src = "./assets/images/slideshow/" + slides[actualSlide].image;
-		text.innerHTML = slides[actualSlide].tagLine;
-		slidesDots[actualSlide].classList.add("dot_selected");
-	});
 
 
 /*Affichage des bullets point*/
