@@ -28,10 +28,10 @@ const fragment = document.createDocumentFragment()
 let actualSlide = 0
 /*Affichage de l'écouteur d'évènement du click droit et gauche*/
 
-function directionSlides(direction) {
+function directionSlides(arrow) {
     const slidesDots = document.querySelectorAll(".dot");
     slidesDots[actualSlide].classList.remove("dot_selected");
-    if (direction === "right") {
+    if (arrow === "right") {
         actualSlide = (actualSlide + 1) % slides.length;
     } else {
         actualSlide = (actualSlide - 1 + slides.length) % slides.length;
